@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5c0814">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta property="og:title" content="Para ti 💌">
+<meta property="og:description" content="Tienes correo. Ábrelo despacito.">
+<meta property="og:image" content="fotos/13.jpeg">
+<title>Para ti, mi Fer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --velvet:#7a0c1c; --velvet-2:#5c0814; --velvet-deep:#33040c;
+  --paper:#f8efe2; --paper-2:#efe1cb; --ink:#3b0b12; --ink-soft:#6b3a40;
+  --gold:#d9b26f; --blush:#f4c6cc; --rose:#c8263f;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out:cubic-bezier(0.77,0,0.175,1);
+  --script:'Pinyon Script', 'Brush Script MT', cursive;
+  --hand:'Caveat', 'Segoe Print', cursive;
+  --serif:'Cormorant Garamond', Georgia, serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+@supports (overflow:clip){ html,body{overflow-x:clip} }
+h1,h2,h3,p,blockquote,figcaption,button{overflow-wrap:break-word;word-wrap:break-word}
+body{
+  margin:0; color:var(--paper); font-family:var(--serif); font-size:19px; line-height:1.55;
+  background:var(--velvet-deep);
+  background-image:
+    radial-gradient(1200px 700px at 15% -10%, #a3162b 0%, transparent 60%),
+    radial-gradient(900px 600px at 110% 30%, #8d1024 0%, transparent 55%),
+    radial-gradient(1000px 800px at 50% 120%, #6a0a19 0%, transparent 60%),
+    linear-gradient(180deg, var(--velvet) 0%, var(--velvet-2) 50%, var(--velvet-deep) 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+body.locked{overflow:hidden}
+/* velvet grain */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.18; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+::selection{background:var(--blush);color:var(--ink)}
+
+#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+main{position:relative;z-index:2;width:100%;overflow-x:hidden}
+@supports (overflow:clip){ main{overflow-x:clip} }
+
+/* ============ GATE ============ */
+#gate{
+  position:fixed; inset:0; z-index:50; display:flex; padding:44px 16px 24px; overflow-y:auto;
+  background:radial-gradient(800px 600px at 50% 40%, #8d1024, var(--velvet-deep));
+  transition:opacity .9s var(--ease-out), transform .9s var(--ease-out);
+}
+#gate.out{opacity:0; transform:scale(1.04); pointer-events:none}
+.paper{
+  background:var(--paper); color:var(--ink);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(122,12,28,.07) 31px 32px),
+    radial-gradient(circle at 20% 10%, #fffaf2, transparent 60%);
+  border-radius:6px;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -20px rgba(0,0,0,.55), 0 8px 18px rgba(0,0,0,.25);
+}
+.gate-card{
+  position:relative; margin:auto; flex:none; width:min(460px,100%); padding:56px 30px 32px;
+  display:grid; overflow:hidden; overflow:clip; overflow-clip-margin:60px;
+}
+.seal{
+  position:absolute; top:-2px; left:50%; width:74px; height:74px; margin-left:-37px; border-radius:50%;
+  display:grid; place-items:center; color:#f9d9c0; font-family:var(--script); font-size:28px; line-height:1;
+  background:radial-gradient(circle at 35% 30%, #d8394f, #8a0f20 60%, #5c0814);
+  box-shadow:0 0 0 5px rgba(160,20,40,.35), 0 6px 14px rgba(0,0,0,.35), inset 0 -4px 8px rgba(0,0,0,.35);
+  transform:translateY(-36%);
+}
+.seal.stamp{animation:stamp .6s var(--ease-out)}
+@keyframes stamp{0%{transform:translateY(-36%) scale(1.5) rotate(-12deg);opacity:.4}100%{transform:translateY(-36%) scale(1) rotate(0)}}
+.step{
+  grid-area:1/1; min-width:0; display:flex; flex-direction:column; gap:14px;
+  opacity:0; transform:translateX(24px); pointer-events:none;
+  transition:opacity .45s var(--ease-out), transform .45s var(--ease-out);
+}
+.step.active{opacity:1; transform:none; pointer-events:auto; visibility:visible}
+.step:not(.active){visibility:hidden; transition:opacity .45s var(--ease-out), transform .45s var(--ease-out), visibility 0s .45s}
+.step.past{transform:translateX(-24px)}
+.kicker{font-family:var(--hand); font-size:22px; color:var(--rose); letter-spacing:.02em; margin:0}
+.step h2{font-family:var(--script); font-weight:400; font-size:46px; line-height:1.05; margin:0; color:var(--velvet)}
+.step p{margin:0; color:var(--ink-soft)}
+.q{font-size:22px; font-style:italic; color:var(--ink)!important}
+.opts{display:grid; gap:10px; margin-top:4px}
+.opt{
+  display:flex; align-items:center; gap:12px; text-align:left; width:100%;
+  padding:12px 16px; border-radius:12px; border:1.5px solid rgba(122,12,28,.22); background:rgba(255,255,255,.55);
+  color:var(--ink); font-size:19px;
+  transition:transform .16s var(--ease-out), background-color .2s ease, border-color .2s ease;
+}
+.opt b{
+  display:grid; place-items:center; width:30px; height:30px; flex:none; border-radius:50%;
+  background:var(--velvet); color:var(--paper); font-family:var(--hand); font-size:20px; font-weight:700;
+}
+.opt:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){ .opt:hover{background:#fff; border-color:var(--rose)} }
+.opt.ok{background:#fde7ea; border-color:var(--rose)}
+.opt.no{animation:nope .4s var(--ease-out)}
+@keyframes nope{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+.shake{animation:nope .4s var(--ease-out)}
+.hint{min-height:28px; font-family:var(--hand); font-size:23px; color:var(--rose)!important}
+.hint.pop{animation:pop .35s var(--ease-out)}
+@keyframes pop{from{opacity:0; transform:translateY(6px)}}
+
+.field{
+  width:100%; padding:14px 16px; border-radius:12px; border:1.5px solid rgba(122,12,28,.25);
+  background:#fff; color:var(--ink); font:500 22px var(--serif); outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.field:focus{border-color:var(--rose); box-shadow:0 0 0 4px rgba(200,38,63,.15)}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:14px 24px; border-radius:999px; border:0; font-weight:600; font-size:19px; letter-spacing:.01em;
+  background:linear-gradient(180deg,#c8263f,#8a0f20); color:#fff;
+  box-shadow:0 10px 22px -8px rgba(138,15,32,.7), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .16s var(--ease-out), box-shadow .2s ease;
+}
+.btn:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){ .btn:hover{box-shadow:0 14px 28px -8px rgba(138,15,32,.85), inset 0 1px 0 rgba(255,255,255,.25)} }
+.btn.ghost{background:transparent; color:var(--velvet); box-shadow:inset 0 0 0 1.5px rgba(122,12,28,.35)}
+.btn.light{background:var(--paper); color:var(--velvet); box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.mt-auto{margin-top:auto}
+
+/* volume */
+.vol-wrap{display:flex; flex-direction:column; align-items:center; gap:14px; margin:6px 0}
+.mini-vinyl{
+  width:120px; height:120px; border-radius:50%; position:relative;
+  background:repeating-radial-gradient(circle, #111 0 2px, #1d1d1d 2px 4px);
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  animation:spin 3.2s linear infinite; animation-play-state:paused;
+}
+.mini-vinyl.on{animation-play-state:running}
+.mini-vinyl::after{
+  content:""; position:absolute; inset:36%; border-radius:50%;
+  background:url(fotos/13.jpeg) center/cover; box-shadow:0 0 0 3px var(--rose);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vol-num{font-family:var(--hand); font-size:30px; color:var(--velvet); line-height:1}
+.vol-mood{font-family:var(--hand); font-size:21px; color:var(--rose); min-height:26px}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:28px; background:transparent; cursor:pointer;
+  --p:60%;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:8px; border-radius:99px;
+  background:linear-gradient(90deg, var(--rose) 0 var(--p), rgba(122,12,28,.18) var(--p) 100%);
+}
+input[type=range]::-moz-range-track{height:8px; border-radius:99px; background:rgba(122,12,28,.18)}
+input[type=range]::-moz-range-progress{height:8px; border-radius:99px; background:var(--rose)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:26px; height:26px; margin-top:-9px; border-radius:50%; border:3px solid #fff;
+  background:var(--rose); box-shadow:0 3px 10px rgba(138,15,32,.5);
+}
+input[type=range]::-moz-range-thumb{width:20px; height:20px; border-radius:50%; border:3px solid #fff; background:var(--rose)}
+
+/* ============ LAYOUT ============ */
+section{position:relative; padding:110px 20px; max-width:1120px; margin:0 auto}
+.head{text-align:center; margin-bottom:46px}
+.head .kicker{color:var(--blush); font-size:24px}
+.head h2{font-family:var(--script); font-weight:400; font-size:clamp(52px,9vw,92px); line-height:1; margin:.08em 0 .1em; color:#fff; text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.head p{max-width:560px; margin:0 auto; color:rgba(248,239,226,.82); font-size:20px}
+.divider{display:block; width:140px; height:20px; margin:16px auto 0; color:var(--gold)}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease-out), transform .9s var(--ease-out); transition-delay:calc(var(--i,0) * 80ms)}
+.rv.in{opacity:1; transform:none}
+
+/* progress thread */
+#thread{position:fixed; top:0; left:0; right:0; height:3px; z-index:40; background:linear-gradient(90deg,var(--gold),var(--blush)); transform-origin:0 50%; transform:scaleX(0)}
+
+/* ============ HERO ============ */
+#hero{min-height:100svh; display:grid; place-items:center; text-align:center; padding-top:60px; padding-bottom:60px}
+.hero-inner{position:relative; z-index:2; width:100%; min-width:0}
+.tl-card{min-width:0}
+#player.needtap .disc{box-shadow:0 0 0 2px var(--gold), 0 0 0 0 rgba(244,198,204,.7); animation:spin 3.2s linear infinite paused, tapPulse 1.4s var(--ease-out) infinite}
+@keyframes tapPulse{70%{box-shadow:0 0 0 2px var(--gold), 0 0 0 14px rgba(244,198,204,0)}100%{box-shadow:0 0 0 2px var(--gold), 0 0 0 0 rgba(244,198,204,0)}}
+.ptip{display:none; font-family:var(--hand); font-size:18px; color:#fff; white-space:nowrap}
+#player.needtap .ptip{display:block}
+#player.needtap .ptext{display:none}
+.hero-hello{font-family:var(--hand); font-size:clamp(24px,4vw,32px); color:var(--blush); margin:0}
+.hero-title{font-family:var(--script); font-weight:400; font-size:clamp(76px,16vw,170px); line-height:.95; margin:.05em 0 .12em; color:#fff; text-shadow:0 6px 40px rgba(0,0,0,.4)}
+.hero-title .nm{color:var(--blush)}
+.hero-sub{max-width:560px; margin:0 auto; font-size:clamp(19px,2.4vw,23px); font-style:italic; color:rgba(248,239,226,.88); min-height:3.2em}
+.caret{display:inline-block; width:2px; height:1em; background:var(--blush); vertical-align:-.12em; margin-left:2px; animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.collage{position:relative; height:clamp(240px,40vw,330px); margin:34px auto 0; max-width:760px}
+.pol{
+  position:absolute; background:#fffaf2; padding:9px 9px 34px; border-radius:3px;
+  box-shadow:0 18px 30px -12px rgba(0,0,0,.6), 0 2px 6px rgba(0,0,0,.25);
+  transform:translate(var(--x,0),var(--y,0)) rotate(var(--r,0deg));
+}
+.pol img{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:1px}
+.pol figcaption{position:absolute; left:0; right:0; bottom:5px; text-align:center; font-family:var(--hand); font-size:18px; color:var(--ink)}
+.tape{position:absolute; top:-12px; left:50%; width:74px; height:24px; margin-left:-37px; background:rgba(244,198,204,.72); transform:rotate(-4deg); box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.collage .pol{width:clamp(118px,19vw,175px); left:50%; top:0; margin-left:calc(clamp(118px,19vw,175px) / -2); opacity:0}
+.collage.go .pol{animation:dealIn .9s var(--ease-out) forwards; animation-delay:calc(var(--i) * 110ms + 300ms)}
+@keyframes dealIn{
+  from{opacity:0; transform:translate(0,60px) rotate(0deg) scale(.94)}
+  to{opacity:1; transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1)}
+}
+.scroll-cue{margin-top:30px; font-family:var(--hand); font-size:22px; color:var(--blush); display:inline-flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none}
+.scroll-cue svg{animation:bob 1.8s var(--ease-in-out) infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* ============ COUNTER ============ */
+.counter{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:820px; margin:0 auto}
+.unit{padding:22px 8px 16px; text-align:center; position:relative}
+.unit .num{display:block; height:1.1em; overflow:hidden; font-family:var(--serif); font-weight:500; font-size:clamp(40px,8vw,78px); line-height:1.1; color:var(--velvet); font-variant-numeric:tabular-nums}
+.unit .num span{display:inline-block}
+.unit .lbl{font-family:var(--hand); font-size:22px; color:var(--rose)}
+.since{text-align:center; margin-top:26px; font-family:var(--hand); font-size:24px; color:var(--blush)}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:820px; margin:34px auto 0}
+.stat{border:1px solid rgba(244,198,204,.25); border-radius:14px; padding:18px 14px; text-align:center; background:rgba(0,0,0,.12)}
+.stat strong{display:block; font-size:clamp(28px,4.4vw,40px); font-weight:500; color:#fff; line-height:1.1; font-variant-numeric:tabular-nums}
+.stat span{font-size:17px; color:rgba(248,239,226,.75)}
+
+/* ============ TIMELINE ============ */
+.timeline{position:relative; max-width:900px; margin:0 auto; padding:10px 0}
+.timeline::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:2px; margin-left:-1px; background:linear-gradient(var(--gold),rgba(217,178,111,.15)); transform-origin:top; transform:scaleY(var(--tl,0))}
+.tl-item{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-bottom:56px}
+.tl-item:nth-child(even) .tl-card{order:2}
+.tl-item:nth-child(even) .tl-pic{order:1; justify-self:end}
+.tl-dot{position:absolute; left:50%; top:50%; width:18px; height:18px; margin:-9px 0 0 -9px; border-radius:50%; background:var(--rose); box-shadow:0 0 0 5px rgba(200,38,63,.3), 0 0 22px var(--rose)}
+.tl-card{padding:24px 24px 20px}
+.tl-date{font-family:var(--hand); font-size:22px; color:var(--rose); margin:0}
+.tl-card h3{font-family:var(--serif); font-size:28px; font-weight:600; margin:0 0 6px; color:var(--velvet); line-height:1.15}
+.tl-card p{margin:0; color:var(--ink-soft); font-size:18px}
+.tl-card blockquote{margin:12px 0 0; padding-left:14px; border-left:3px solid var(--blush); font-family:var(--hand); font-size:23px; line-height:1.25; color:var(--ink)}
+.tl-pic{width:min(240px,100%)}
+.tl-pic.pol{position:relative; transform:rotate(var(--r,0deg))}
+.tl-item.rv .tl-pic{transition:transform .9s var(--ease-out)}
+
+/* ============ GALLERY ============ */
+.board{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:34px 26px; max-width:1040px; margin:0 auto}
+.board .pol{position:relative; cursor:zoom-in; border:0; text-align:left; transition:transform .45s var(--ease-out), box-shadow .3s ease, opacity .9s var(--ease-out); transform:rotate(var(--r))}
+@media (hover:hover) and (pointer:fine){ .board .pol:hover{transform:rotate(0deg) translateY(-8px) scale(1.04); z-index:3; box-shadow:0 30px 40px -14px rgba(0,0,0,.7)} }
+.board .pol.rv{transform:translateY(28px) rotate(var(--r))}
+.board .pol.rv.in{transform:rotate(var(--r))}
+.film{max-width:420px; margin:56px auto 0; padding:14px; background:#120306; border-radius:8px; box-shadow:0 24px 50px -16px rgba(0,0,0,.7); position:relative}
+.film::before,.film::after{content:""; position:absolute; left:4px; right:4px; height:8px; background:repeating-linear-gradient(90deg,#f8efe2 0 10px,transparent 10px 22px); opacity:.5}
+.film::before{top:3px}.film::after{bottom:3px}
+.film video{width:100%; border-radius:4px; display:block; background:#000}
+.film p{margin:10px 0 0; text-align:center; font-family:var(--hand); font-size:22px; color:var(--blush)}
+
+/* lightbox */
+#lb{position:fixed; inset:0; z-index:60; display:grid; place-items:center; padding:20px; background:rgba(20,2,6,.88); opacity:0; pointer-events:none; transition:opacity .3s var(--ease-out)}
+#lb.open{opacity:1; pointer-events:auto}
+#lb .pol{position:relative; width:min(440px,92vw); padding:12px 12px 56px; transform:scale(.95) rotate(-2deg); transition:transform .4s var(--ease-out)}
+#lb.open .pol{transform:scale(1) rotate(-1deg)}
+#lb .pol img{aspect-ratio:auto; max-height:70svh; object-fit:contain; background:#000}
+#lb figcaption{font-size:24px; bottom:12px; padding:0 10px}
+#lb .x{position:absolute; top:16px; right:16px; width:46px; height:46px; border-radius:50%; border:0; background:var(--paper); color:var(--velvet); font-size:26px; line-height:1}
+
+/* ============ QUIZ ============ */
+.quiz{max-width:620px; margin:0 auto; padding:34px 28px 28px; position:relative; overflow:hidden; min-height:440px}
+.quiz .dots{display:flex; gap:6px; justify-content:center; margin-bottom:18px}
+.quiz .dots i{width:8px; height:8px; border-radius:50%; background:rgba(122,12,28,.2); transition:background-color .3s ease, transform .3s var(--ease-out)}
+.quiz .dots i.on{background:var(--rose); transform:scale(1.3)}
+.qcard{display:flex; flex-direction:column; gap:14px}
+.qcard.enter{animation:qin .5s var(--ease-out)}
+@keyframes qin{from{opacity:0; transform:translateX(30px)}}
+.qcard h3{margin:0; font-size:clamp(25px,4vw,30px); line-height:1.2; color:var(--velvet); font-weight:600}
+.trap{align-self:flex-start; font-family:var(--hand); font-size:19px; color:#fff; background:var(--rose); padding:2px 12px; border-radius:99px; transform:rotate(-2deg)}
+.reply{font-family:var(--hand); font-size:25px; line-height:1.25; color:var(--ink); background:#fde7ea; border-radius:14px; padding:12px 16px; display:none}
+.reply.show{display:block; animation:pop .4s var(--ease-out)}
+.final-zone{position:relative; min-height:200px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:22px; text-align:center}
+#noBtn{position:relative; transition:transform .35s var(--ease-out)}
+#yesBtn{transition:transform .35s var(--ease-out)}
+.handsome{text-align:center}
+.handsome .vol-num{font-size:64px}
+
+/* ============ REASONS ============ */
+.reasons{display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:18px; max-width:980px; margin:0 auto}
+.flip{perspective:900px; min-height:190px; border:0; background:none; padding:0; min-width:0; display:grid}
+.flip .in{position:relative; display:grid; width:100%; min-height:190px; transform-style:preserve-3d; transition:transform .7s var(--ease-in-out)}
+.flip.open .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{grid-area:1/1; position:relative; min-height:190px; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:10px; display:grid; place-items:center; padding:16px; text-align:center}
+.flip .f{background:linear-gradient(160deg,#f8efe2,#ead8bd); color:var(--velvet); box-shadow:0 14px 26px -12px rgba(0,0,0,.6)}
+.flip .f::before{content:""; position:absolute; inset:0; border-radius:10px; background:linear-gradient(to bottom right, transparent 49.5%, rgba(122,12,28,.15) 50%, transparent 50.5%), linear-gradient(to bottom left, transparent 49.5%, rgba(122,12,28,.15) 50%, transparent 50.5%); background-size:100% 60%; background-repeat:no-repeat}
+.flip .f .s{width:46px; height:46px; border-radius:50%; display:grid; place-items:center; color:#f9d9c0; font-size:20px; background:radial-gradient(circle at 35% 30%, #d8394f, #8a0f20 60%, #5c0814); box-shadow:0 4px 10px rgba(0,0,0,.3); position:relative}
+.flip .f small{position:absolute; bottom:12px; left:0; right:0; font-family:var(--hand); font-size:19px; color:var(--rose)}
+.flip .b{transform:rotateY(180deg); background:var(--paper); color:var(--ink); font-family:var(--hand); font-size:21px; line-height:1.2; box-shadow:0 14px 26px -12px rgba(0,0,0,.6)}
+@media (hover:hover) and (pointer:fine){ .flip:not(.open):hover .in{transform:rotateY(12deg) translateY(-4px)} }
+
+/* ============ LETTER ============ */
+.envelope-stage{display:grid; place-items:center; min-height:330px}
+.env{position:relative; width:min(380px,90vw); aspect-ratio:3/2; border:0; padding:0; background:none; perspective:1000px}
+.env .back{position:absolute; inset:0; background:#e9d6b8; border-radius:6px; box-shadow:0 30px 50px -18px rgba(0,0,0,.7)}
+.env .peek{position:absolute; left:7%; right:7%; top:10%; height:80%; background:var(--paper); border-radius:4px; padding:18px; font-family:var(--hand); color:var(--ink); font-size:22px; text-align:left; transition:transform .8s var(--ease-out) .35s}
+.env .front{position:absolute; inset:0; border-radius:6px; background:linear-gradient(to top right, #f1e2c8 50%, transparent 50%) left/50.2% 100% no-repeat, linear-gradient(to top left, #f1e2c8 50%, transparent 50%) right/50.2% 100% no-repeat; z-index:2}
+.env .front::after{content:""; position:absolute; left:0; right:0; bottom:0; height:56%; background:#f4e7d0; clip-path:polygon(0 100%,50% 18%,100% 100%); }
+.env .flap{position:absolute; left:0; right:0; top:0; height:58%; z-index:3; transform-origin:top; transition:transform .6s var(--ease-in-out); transform-style:preserve-3d}
+.env .flap::before{content:""; position:absolute; inset:0; background:#e2caa4; clip-path:polygon(0 0,100% 0,50% 100%); filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+.env .wax{position:absolute; left:50%; top:58%; width:66px; height:66px; margin:-33px 0 0 -33px; z-index:4; border-radius:50%; display:grid; place-items:center; color:#f9d9c0; font-family:var(--script); font-size:26px; background:radial-gradient(circle at 35% 30%, #d8394f, #8a0f20 60%, #5c0814); box-shadow:0 0 0 5px rgba(160,20,40,.35), 0 6px 14px rgba(0,0,0,.35); transition:opacity .3s ease, transform .4s var(--ease-out)}
+.env.open .wax{opacity:0; transform:scale(.8)}
+.env.open .flap{transform:rotateX(180deg); z-index:1}
+.env.open .peek{transform:translateY(-46%)}
+.env-hint{margin-top:18px; font-family:var(--hand); font-size:24px; color:var(--blush); text-align:center}
+.letter{max-width:720px; margin:30px auto 0; padding:46px clamp(22px,6vw,64px) 50px; display:none}
+.letter.show{display:block; animation:unfold .9s var(--ease-out)}
+@keyframes unfold{from{opacity:0; transform:translateY(40px) scale(.98)}}
+.letter p{margin:0 0 1.05em; font-size:20.5px; line-height:1.7; color:var(--ink)}
+.letter .dear{font-family:var(--script); font-size:52px; color:var(--velvet); margin-bottom:.3em; line-height:1}
+.letter .verse{font-style:italic; text-align:center; padding:18px 10px; border-top:1px solid rgba(122,12,28,.2); border-bottom:1px solid rgba(122,12,28,.2); color:var(--velvet)}
+.letter .sign{font-family:var(--script); font-size:46px; color:var(--rose); text-align:right; margin:0}
+.letter p.lp{opacity:0; transform:translateY(10px); transition:opacity .8s var(--ease-out), transform .8s var(--ease-out)}
+.letter p.lp.in{opacity:1; transform:none}
+
+/* ============ FUTURE ============ */
+.future{display:grid; gap:26px; max-width:820px; margin:0 auto}
+.fq{padding:28px 26px}
+.fq h3{margin:0 0 14px; font-size:27px; color:var(--velvet); font-weight:600; line-height:1.2}
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{padding:11px 18px; border-radius:999px; border:1.5px solid rgba(122,12,28,.25); background:#fff; color:var(--ink); font-size:19px; transition:transform .16s var(--ease-out), background-color .2s ease, color .2s ease, border-color .2s ease}
+.chip:active{transform:scale(.96)}
+.chip.sel{background:var(--rose); color:#fff; border-color:var(--rose)}
+.fq .reply{margin-top:14px}
+
+/* ============ FINAL ============ */
+#final{text-align:center; min-height:90svh; display:grid; place-items:center}
+.big-heart{width:clamp(150px,30vw,230px); margin:0 auto; cursor:pointer; filter:drop-shadow(0 10px 40px rgba(200,38,63,.6)); animation:beat 1.6s var(--ease-out) infinite; border:0; background:none; padding:0}
+@keyframes beat{0%,40%,100%{transform:scale(1)}15%{transform:scale(1.08)}28%{transform:scale(1.02)}}
+.final-title{font-family:var(--script); font-weight:400; font-size:clamp(70px,14vw,150px); line-height:1; margin:.1em 0 0; color:#fff}
+.final-sub{font-size:21px; font-style:italic; color:rgba(248,239,226,.85); max-width:520px; margin:12px auto 0}
+footer{position:relative; z-index:2; text-align:center; padding:30px 20px 120px; font-family:var(--hand); font-size:21px; color:rgba(244,198,204,.75)}
+
+/* ============ PLAYER ============ */
+#player{
+  position:fixed; right:16px; bottom:16px; z-index:45; display:flex; align-items:center; gap:10px;
+  padding:8px 10px 8px 8px; border-radius:999px; background:rgba(30,3,8,.78); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(244,198,204,.2); box-shadow:0 16px 34px -12px rgba(0,0,0,.7);
+  transform:translateY(140%); transition:transform .6s var(--ease-out);
+  max-width:calc(100vw - 32px);
+}
+#player.show{transform:none}
+.disc{position:relative; width:52px; height:52px; flex:none; border-radius:50%; border:0; padding:0; background:repeating-radial-gradient(circle,#0d0d0d 0 2px,#202020 2px 3.5px); animation:spin 3.2s linear infinite; animation-play-state:paused; box-shadow:0 0 0 2px rgba(217,178,111,.5)}
+.disc::after{content:""; position:absolute; inset:32%; border-radius:50%; background:url(fotos/13.jpeg) center/cover; box-shadow:0 0 0 2px var(--rose)}
+#player.playing .disc{animation-play-state:running}
+.arm{position:absolute; left:46px; top:2px; width:3px; height:30px; background:var(--gold); border-radius:3px; transform-origin:top center; transform:rotate(-38deg); transition:transform .5s var(--ease-out); pointer-events:none}
+#player.playing .arm{transform:rotate(-12deg)}
+.ptext{display:flex; flex-direction:column; line-height:1.1; min-width:0}
+.ptext b{font-family:var(--hand); font-size:20px; font-weight:700; color:#fff; white-space:nowrap}
+.ptext small{font-size:14px; color:rgba(248,239,226,.65); white-space:nowrap}
+.pvol{display:flex; align-items:center; gap:6px; width:110px}
+.pvol svg{flex:none; color:var(--blush)}
+#player input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg, var(--blush) 0 var(--p), rgba(255,255,255,.18) var(--p) 100%)}
+#player input[type=range]::-webkit-slider-thumb{width:18px;height:18px;margin-top:-5px;border-width:2px}
+
+/* trail */
+.trail{position:fixed; z-index:70; pointer-events:none; color:var(--blush); font-size:14px; line-height:1}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:760px){
+  body{font-size:18px}
+  section{padding:84px 16px}
+  .counter{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:1fr}
+  .timeline::before{left:14px}
+  .tl-item{grid-template-columns:1fr; gap:18px; padding-left:40px; margin-bottom:48px}
+  .tl-item .tl-card,.tl-item:nth-child(even) .tl-card{order:1}
+  .tl-item .tl-pic,.tl-item:nth-child(even) .tl-pic{order:2; justify-self:start; width:200px}
+  .tl-dot{left:14px; top:28px}
+  .board{grid-template-columns:repeat(2,1fr); gap:24px 16px}
+  .board .pol figcaption{font-size:16px}
+  .reasons{grid-template-columns:repeat(2,1fr)}
+  .ptext{display:none}
+  .collage{height:190px}
+  .collage .pol{width:78px; margin-left:-39px; padding:5px 5px 22px}
+  .collage .pol figcaption{font-size:13px; bottom:3px}
+  .collage .pol:nth-child(1){--x:-140%!important; --r:-8deg!important}
+  .collage .pol:nth-child(2){--x:-72%!important}
+  .collage .pol:nth-child(4){--x:72%!important}
+  .collage .pol:nth-child(5){--x:140%!important; --r:8deg!important}
+  .gate-card{padding:50px 20px 24px}
+  .step h2{font-size:40px}
+  .q{font-size:20px}
+  .opt{font-size:18px; padding:11px 14px}
+  .hero-title{font-size:clamp(56px,17vw,96px)}
+  .head h2{font-size:clamp(46px,13vw,72px)}
+  .head p{font-size:18px}
+  .unit{padding:16px 6px 12px}
+  .unit .num{font-size:clamp(34px,11vw,52px)}
+  .quiz{padding:26px 18px 22px}
+  .fq{padding:22px 18px}
+  .fq h3{font-size:23px}
+  .chip{font-size:17px; padding:10px 14px}
+  .letter p{font-size:19px}
+  .final-zone{flex-direction:column; gap:16px}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rv,.letter p.lp{transform:none!important; transition:opacity .5s ease}
+  .collage.go .pol{animation:fadeOnly .6s ease forwards}
+  .collage .pol{transform:translate(var(--x),var(--y)) rotate(var(--r))}
+  @keyframes fadeOnly{to{opacity:1}}
+  .big-heart,.scroll-cue svg,.disc,.mini-vinyl,.caret{animation:none}
+  .flip .in{transition:transform .01s}
+  .env .flap,.env .peek{transition:none}
+}
+</style>
+</head>
+<body class="locked">
+<canvas id="sky" aria-hidden="true"></canvas>
+<div id="thread" aria-hidden="true"></div>
+<audio id="song" src="media/la-promesa.mp3" preload="auto" loop></audio>
+
+<!-- ================= GATE ================= -->
+<div id="gate" role="dialog" aria-modal="true" aria-label="Entrada">
+  <div class="gate-card paper">
+    <div class="seal" id="seal">S</div>
+
+    <!-- step 1: clave -->
+    <div class="step active" data-step="1">
+      <p class="kicker">Solo para una persona en el mundo</p>
+      <h2>Clave de acceso</h2>
+      <p class="q">¿Cómo te está diciendo Sebastián últimamente?</p>
+      <div class="opts" id="keyOpts">
+        <button class="opt"><b>a</b> Regueritos</button>
+        <button class="opt"><b>b</b> Mamor</button>
+        <button class="opt"><b>c</b> Mi cielo</button>
+        <button class="opt" data-ok="1"><b>d</b> Mi chinita</button>
+      </div>
+      <p class="hint" id="keyHint"></p>
+    </div>
+
+    <!-- step 2: nombre -->
+    <div class="step" data-step="2">
+      <p class="kicker">Acceso concedido ✓</p>
+      <h2>Antes de entrar…</h2>
+      <p class="q">¿Cómo te llamas, preciosa?</p>
+      <form id="nameForm" class="opts" autocomplete="off">
+        <input class="field" id="nameIn" maxlength="24" placeholder="Escribe tu nombre aquí" aria-label="Tu nombre">
+        <button class="btn" type="submit">Continuar ♡</button>
+      </form>
+      <p class="hint" id="nameHint"></p>
+    </div>
+
+    <!-- step 3: volumen -->
+    <div class="step" data-step="3">
+      <p class="kicker" id="volKicker">Una última cosita</p>
+      <h2>Nuestra canción</h2>
+      <p class="q">¿A qué volumen quieres que suene mientras exploras todo?</p>
+      <div class="vol-wrap">
+        <div class="mini-vinyl" id="miniVinyl"></div>
+        <div class="vol-num"><span id="volNum">60</span>%</div>
+        <input type="range" id="volGate" min="0" max="100" value="60" aria-label="Volumen">
+        <div class="vol-mood" id="volMood">perfecto para soñar despierta</div>
+      </div>
+      <div class="row mt-auto" style="justify-content:center">
+        <button class="btn ghost" id="testBtn" type="button">▶ Probar</button>
+        <button class="btn" id="enterBtn" type="button">Entrar a nuestro mundo ♡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main" aria-hidden="true">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-hello rv" style="--i:0">hecho a mano, línea por línea</p>
+      <h1 class="hero-title rv" style="--i:1">Para ti, <span class="nm" data-name>Fer</span></h1>
+      <p class="hero-sub" id="typed"></p>
+      <div class="collage" id="collage">
+        <figure class="pol" style="--i:0;--x:-235%;--y:30px;--r:-11deg"><div class="tape"></div><img src="fotos/04.jpeg" alt=""><figcaption>nosotros</figcaption></figure>
+        <figure class="pol" style="--i:1;--x:-118%;--y:-6px;--r:-5deg"><img src="fotos/08.jpeg" alt=""><figcaption>el páramo</figcaption></figure>
+        <figure class="pol" style="--i:2;--x:0%;--y:-22px;--r:2deg"><div class="tape"></div><img src="fotos/05.jpeg" alt=""><figcaption>mi lugar</figcaption></figure>
+        <figure class="pol" style="--i:3;--x:118%;--y:-4px;--r:6deg"><img src="fotos/10.jpeg" alt=""><figcaption>siempre así</figcaption></figure>
+        <figure class="pol" style="--i:4;--x:235%;--y:28px;--r:12deg"><div class="tape"></div><img src="fotos/13.jpeg" alt=""><figcaption>tú y yo</figcaption></figure>
+      </div>
+      <a class="scroll-cue" href="#contador">baja despacito
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section id="contador">
+    <div class="head rv">
+      <p class="kicker">el reloj que más me importa</p>
+      <h2>Desde nuestro primer beso</h2>
+      <p>Aquella noche te pregunté si había estado mal. Me dijiste que solo te aumentaba las ganas de besarme cada que me vieras. Desde entonces, cada segundo cuenta.</p>
+    </div>
+    <div class="counter">
+      <div class="unit paper rv" style="--i:0"><span class="num" id="cD">0</span><span class="lbl">días</span></div>
+      <div class="unit paper rv" style="--i:1"><span class="num" id="cH">0</span><span class="lbl">horas</span></div>
+      <div class="unit paper rv" style="--i:2"><span class="num" id="cM">0</span><span class="lbl">minutos</span></div>
+      <div class="unit paper rv" style="--i:3"><span class="num" id="cS">0</span><span class="lbl">segundos</span></div>
+    </div>
+    <p class="since rv">“Hoy fue mágico” — Sebas, 14 · 09 · 2026, 11:43 p. m.</p>
+    <div class="stats">
+      <div class="stat rv" style="--i:0"><strong id="beats">0</strong><span>latidos de mi corazón desde ese beso</span></div>
+      <div class="stat rv" style="--i:1"><strong data-count="1737">0</strong><span>veces que escribimos “te amo”</span></div>
+      <div class="stat rv" style="--i:2"><strong data-count="43429">0</strong><span>líneas de chat hablando de todo y de nada</span></div>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section id="historia">
+    <div class="head rv">
+      <p class="kicker">capítulo por capítulo</p>
+      <h2>Nuestra historia</h2>
+      <p>Tuvimos la suerte de coincidir y la magia de conectar.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">6 de agosto · 11:22 p. m.</p><h3>Un link del trabajo</h3><p>El primer mensaje que te mandé fue… un link del restaurante. Nada romántico. Nadie sabía lo que venía.</p></div>
+        <figure class="pol tl-pic" style="--r:4deg"><div class="tape"></div><img src="fotos/07.jpeg" alt="" loading="lazy"><figcaption>de compañeros a esto</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">1 de septiembre</p><h3>La guerra del buzo</h3><p>Dejaste tu buzo y te propuse un cambio.</p><blockquote>“A mí me encanta, dudo que lo cambie” — tú<br>“Ya perdiste de igual modo” — yo</blockquote></div>
+        <figure class="pol tl-pic" style="--r:-5deg"><img src="fotos/09.jpeg" alt="" loading="lazy"><figcaption>¿sigue siendo tuyo?</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">10 de septiembre</p><h3>Me animé a decírtelo</h3><blockquote>“En tus ojos veía que sentías algo por mí, así fuera muy mínimo, por eso también me animé”</blockquote></div>
+        <figure class="pol tl-pic" style="--r:3deg"><div class="tape"></div><img src="fotos/14.jpeg" alt="" loading="lazy"><figcaption>esos ojitos</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">14 de septiembre</p><h3>Nuestro primer beso</h3><p>Te pregunté si podía besarte. Y desde entonces no nos volvimos a separar nunca.</p><blockquote>“Gracias por preguntar si podías besarme amor 🥹” — tú</blockquote></div>
+        <figure class="pol tl-pic" style="--r:-3deg"><img src="fotos/03.jpeg" alt="" loading="lazy"><figcaption>bendito ese día</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">15 de septiembre · 10:41 p. m.</p><h3>El primer “te amo”</h3><p>Lo escribí con miedo, con un emoji derritiéndose. Era verdad.</p><blockquote>“Pero creo te amo Fer 🫠”</blockquote></div>
+        <figure class="pol tl-pic" style="--r:5deg"><div class="tape"></div><img src="fotos/01.jpeg" alt="" loading="lazy"><figcaption>y lo sigo diciendo</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">3 de noviembre</p><h3>La promesa</h3><p>La base de todo, a la que volvemos cuando las cosas se ponen difíciles.</p><blockquote>“Es una promesa, de los dos para Dios… 🤞🏻❤️”</blockquote></div>
+        <figure class="pol tl-pic" style="--r:-4deg"><img src="fotos/15.jpeg" alt="" loading="lazy"><figcaption>de la mano de Dios</figcaption></figure>
+      </div>
+      <div class="tl-item rv">
+        <span class="tl-dot"></span>
+        <div class="tl-card paper"><p class="tl-date">hoy</p><h3>Esta página</h3><p>Porque ni con mil diccionarios me alcanza para decirte lo que significas. Así que te hice un rinconcito en internet.</p></div>
+        <figure class="pol tl-pic" style="--r:3deg"><div class="tape"></div><img src="fotos/02.jpeg" alt="" loading="lazy"><figcaption>serendipia</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="head rv">
+      <p class="kicker">toca cualquiera</p>
+      <h2>Nuestros recuerdos</h2>
+      <p>Cada foto tiene una notita escondida.</p>
+    </div>
+    <div class="board" id="board"></div>
+    <div class="film rv">
+      <video id="vid" src="media/video.mp4" controls playsinline preload="metadata"></video>
+      <p>en movimiento también eres mi favorita</p>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="head rv">
+      <p class="kicker">cuidado… hay trampas</p>
+      <h2>¿Cuánto me conoces?</h2>
+      <p>Responde con el corazón. O no. Igual tengo todo calculado.</p>
+    </div>
+    <div class="quiz paper rv" id="quizBox">
+      <div class="dots" id="qDots"></div>
+      <div id="qStage"></div>
+    </div>
+  </section>
+
+  <!-- RAZONES -->
+  <section id="razones">
+    <div class="head rv">
+      <p class="kicker">doce sobres sellados</p>
+      <h2>Razones por las que te amo</h2>
+      <p>Ábrelos todos. Son solo algunas; las demás no caben.</p>
+    </div>
+    <div class="reasons" id="reasons"></div>
+  </section>
+
+  <!-- CARTA -->
+  <section id="carta">
+    <div class="head rv">
+      <p class="kicker">tienes correo</p>
+      <h2>Una carta para ti</h2>
+    </div>
+    <div class="envelope-stage rv">
+      <button class="env" id="env" aria-label="Abrir la carta">
+        <div class="back"></div>
+        <div class="peek">Fer: <br><span style="font-size:18px;color:var(--ink-soft)">ábreme despacito…</span></div>
+        <div class="front"></div>
+        <div class="flap"></div>
+        <div class="wax">S&amp;F</div>
+      </button>
+    </div>
+    <p class="env-hint rv" id="envHint">toca el sello para abrirla</p>
+    <article class="letter paper" id="letter"></article>
+  </section>
+
+  <!-- FUTURO -->
+  <section id="futuro">
+    <div class="head rv">
+      <p class="kicker">preguntas de la carta</p>
+      <h2>Nuestro futuro</h2>
+      <p>Tú decides. Yo tomo nota.</p>
+    </div>
+    <div class="future">
+      <div class="fq paper rv" data-key="casa">
+        <h3>Nuestra casa… ¿será campestre o citadina?</h3>
+        <div class="chips">
+          <button class="chip" data-r="Campestre: con montañas, frío rico y un perro corriendo. Anotado ✍️">🌿 Campestre</button>
+          <button class="chip" data-r="Citadina: luces de la ciudad desde la ventana, como esa noche. Anotado ✍️">🌆 Citadina</button>
+          <button class="chip" data-r="Las dos: una en la ciudad y una finca para escaparnos. Tú no pides poco y me encanta 😌">✨ ¿Y por qué no las dos?</button>
+        </div>
+        <p class="reply"></p>
+      </div>
+      <div class="fq paper rv" data-key="luna">
+        <h3>¿Dónde será la luna de miel?</h3>
+        <div class="chips">
+          <button class="chip" data-r="Playa: tú, yo, el mar y cero relojes. Ya empiezo a ahorrar 🏝️">🏝️ En la playa</button>
+          <button class="chip" data-r="Europa: caminar de la mano por calles viejas. Ya empiezo a ahorrar ✈️">✈️ Europa</button>
+          <button class="chip" data-r="Montaña: una cabaña, una cobija y tú. Perfecto 🏔️">🏔️ Una cabaña en la montaña</button>
+          <button class="chip" data-r="Respuesta correcta. Contigo cualquier lugar es el mejor lugar 💗">💗 Donde tú estés</button>
+        </div>
+        <p class="reply"></p>
+      </div>
+      <div class="fq paper rv" data-key="hijos">
+        <h3>Los bautizaremos con nuestros apellidos… ¿cuántos?</h3>
+        <div class="chips">
+          <button class="chip" data-r="Uno: con tu sonrisa, tus ojitos preciosos y tus pucheros 🥹">👶 Uno</button>
+          <button class="chip" data-r="Dos: uno con tus ojos y otro con tu sonrisa 🥹">👶👶 Dos</button>
+          <button class="chip" data-r="Tres o más… ok, ok, hablemos de esto con calma 😳 jajaja">👶👶👶 Muchos</button>
+        </div>
+        <p class="reply"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="final">
+    <div>
+      <button class="big-heart rv" id="bigHeart" aria-label="Toca el corazón">
+        <svg viewBox="0 0 100 90"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b81"/><stop offset="1" stop-color="#a3162b"/></linearGradient></defs><path fill="url(#hg)" d="M50 86 C20 64 2 48 2 27 C2 12 14 2 27 2 C37 2 45 8 50 16 C55 8 63 2 73 2 C86 2 98 12 98 27 C98 48 80 64 50 86Z"/></svg>
+      </button>
+      <h2 class="final-title rv">Más que te amo</h2>
+      <p class="final-sub rv">Ponme como un sello sobre tu corazón. Las muchas aguas no podrán apagar este amor. <br>— Cantares 8:6-7</p>
+    </div>
+  </section>
+</main>
+<footer>hecho con todo mi amor por Sebastián, para <span data-name>Fer</span> 💗</footer>
+
+<!-- lightbox -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="Foto">
+  <button class="x" id="lbX" aria-label="Cerrar">×</button>
+  <figure class="pol"><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<!-- player -->
+<div id="player" aria-label="Reproductor">
+  <button class="disc" id="disc" aria-label="Pausar o reproducir"></button>
+  <span class="arm"></span>
+  <div class="ptext"><b>La promesa</b><small>Melendi · nuestra canción</small></div>
+  <span class="ptip">toca el disco ▶</span>
+  <div class="pvol">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    <input type="range" id="volPlayer" min="0" max="100" value="60" aria-label="Volumen">
+  </div>
+</div>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const EASE = 'cubic-bezier(0.23, 1, 0.32, 1)';
+const store = {
+  get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } },
+  set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} }
+};
+
+/* ---------- AJUSTES ---------- */
+// Primer beso: 14 sep 2026 (hora aproximada: 8:00 p. m.)
+const FIRST_KISS = new Date(2026, 8, 14, 20, 0, 0);
+
+let NAME = 'Fer';
+const audio = $('#song');
+
+/* ---------- HEART BURST ---------- */
+function burst(x, y, n = 18){
+  if (reduce) n = 6;
+  const glyphs = ['♥','❤','💗','♡','💕'];
+  for (let i = 0; i < n; i++){
+    const s = document.createElement('span');
+    s.className = 'trail';
+    s.textContent = glyphs[i % glyphs.length];
+    s.style.left = x + 'px'; s.style.top = y + 'px';
+    s.style.fontSize = (14 + Math.random() * 18) + 'px';
+    s.style.color = Math.random() > .5 ? '#f4c6cc' : '#ff6b81';
+    document.body.appendChild(s);
+    const a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 130;
+    const dx = Math.cos(a) * d, dy = Math.sin(a) * d - 60;
+    const anim = s.animate(
+      reduce
+        ? [{opacity:1},{opacity:0}]
+        : [{transform:'translate(-50%,-50%) scale(.6)', opacity:1},
+           {transform:`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(1) rotate(${(Math.random()-.5)*60}deg)`, opacity:0}],
+      {duration: 900 + Math.random()*500, easing: EASE, fill:'forwards'}
+    );
+    anim.onfinish = () => s.remove();
+  }
+}
+
+/* ---------- CURSOR TRAIL ---------- */
+if (fine && !reduce){
+  let last = 0;
+  addEventListener('pointermove', e => {
+    const now = performance.now();
+    if (now - last < 55) return;
+    last = now;
+    const s = document.createElement('span');
+    s.className = 'trail'; s.textContent = '♥';
+    s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+    document.body.appendChild(s);
+    s.animate([{transform:'translate(-50%,-50%) scale(1)', opacity:.9},{transform:'translate(-50%,-160%) scale(.4)', opacity:0}],
+      {duration:800, easing:EASE, fill:'forwards'}).onfinish = () => s.remove();
+  }, {passive:true});
+}
+
+/* ---------- FLOATING HEARTS CANVAS ---------- */
+(function sky(){
+  const c = $('#sky'), g = c.getContext('2d');
+  let W, H, dpr, parts = [];
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+  }
+  size(); addEventListener('resize', size);
+  const N = innerWidth < 700 ? 18 : 32;
+  function mk(init){
+    return { x:Math.random()*W, y: init ? Math.random()*H : H + 30*dpr,
+      s:(4 + Math.random()*10)*dpr, v:(.15 + Math.random()*.45)*dpr,
+      w:Math.random()*Math.PI*2, a:.12 + Math.random()*.35, petal:Math.random() > .55 };
+  }
+  for (let i=0;i<N;i++) parts.push(mk(true));
+  function heart(x,y,s){
+    g.beginPath(); g.moveTo(x, y + s*.3);
+    g.bezierCurveTo(x, y, x - s*.5, y, x - s*.5, y + s*.3);
+    g.bezierCurveTo(x - s*.5, y + s*.6, x, y + s*.8, x, y + s);
+    g.bezierCurveTo(x, y + s*.8, x + s*.5, y + s*.6, x + s*.5, y + s*.3);
+    g.bezierCurveTo(x + s*.5, y, x, y, x, y + s*.3); g.fill();
+  }
+  function draw(){
+    g.clearRect(0,0,W,H);
+    for (const p of parts){
+      g.globalAlpha = p.a;
+      g.fillStyle = p.petal ? '#f4c6cc' : '#ff8fa0';
+      if (p.petal){ g.beginPath(); g.ellipse(p.x, p.y, p.s*.35, p.s*.6, p.w, 0, Math.PI*2); g.fill(); }
+      else heart(p.x, p.y, p.s);
+    }
+  }
+  if (reduce){ draw(); return; }
+  let running = true;
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) requestAnimationFrame(tick); });
+  function tick(){
+    if (!running) return;
+    for (const p of parts){
+      p.y -= p.v; p.w += .01; p.x += Math.sin(p.w) * .35 * dpr;
+      if (p.y < -30*dpr){ Object.assign(p, mk(false)); }
+    }
+    draw(); requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- RANGE FILL ---------- */
+function paintRange(r){ r.style.setProperty('--p', r.value + '%'); }
+
+/* ================= GATE ================= */
+function goStep(n){
+  $$('.step').forEach(s => {
+    const k = +s.dataset.step;
+    s.classList.toggle('active', k === n);
+    s.classList.toggle('past', k < n);
+  });
+  const seal = $('#seal');
+  seal.classList.remove('stamp'); void seal.offsetWidth; seal.classList.add('stamp');
+  setTimeout(() => { const f = document.querySelector('.step.active input'); if (f && fine) f.focus(); }, 450);
+}
+
+// step 1 — clave
+const wrongHints = [
+  'Mmm… ¿segura? 🤨',
+  'Esa no es, cielito 😏',
+  'Pista: empieza por “mi chi…” 👀',
+  'Te doy otra oportunidad porque te amo 💗',
+  'Es la última opción, mi chinita 😂'
+];
+let wrongN = 0;
+$$('#keyOpts .opt').forEach(b => b.addEventListener('click', e => {
+  const hint = $('#keyHint');
+  if (b.dataset.ok){
+    b.classList.add('ok');
+    hint.textContent = '¡Correcto! Abriendo… 💌';
+    hint.classList.remove('pop'); void hint.offsetWidth; hint.classList.add('pop');
+    burst(e.clientX, e.clientY, 14);
+    setTimeout(() => goStep(2), 900);
+  } else {
+    b.classList.remove('no'); void b.offsetWidth; b.classList.add('no');
+    hint.textContent = wrongHints[Math.min(wrongN++, wrongHints.length - 1)];
+    hint.classList.remove('pop'); void hint.offsetWidth; hint.classList.add('pop');
+  }
+}));
+
+// step 2 — nombre
+$('#nameForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = $('#nameIn').value.trim();
+  const hint = $('#nameHint');
+  if (!v){
+    $('#nameIn').classList.remove('shake'); void $('#nameIn').offsetWidth; $('#nameIn').classList.add('shake');
+    hint.textContent = 'Escríbelo, no seas tímida 🙈';
+    return;
+  }
+  NAME = v.charAt(0).toUpperCase() + v.slice(1);
+  const isFer = /fer/i.test(v);
+  hint.textContent = isFer ? `Lo sabía. Hola, mi ${NAME} 💗` : `Hola, ${NAME}… aunque para mí siempre serás mi Fer 💗`;
+  hint.classList.remove('pop'); void hint.offsetWidth; hint.classList.add('pop');
+  $('#volKicker').textContent = `Una última cosita, ${NAME}`;
+  $$('[data-name]').forEach(el => el.textContent = NAME);
+  document.title = `Para ti, ${NAME} 💗`;
+  setTimeout(() => goStep(3), 1300);
+});
+
+// step 3 — volumen
+const volGate = $('#volGate'), volPlayer = $('#volPlayer');
+function mood(v){
+  if (v == 0) return 'silencio total… ¿segura? 🤫';
+  if (v < 25) return 'un susurro al oído';
+  if (v < 55) return 'suavecito, como tus abrazos';
+  if (v < 85) return 'perfecto para soñar despierta';
+  return '¡a todo pulmón! 🎶';
+}
+function setVol(v, src){
+  v = +v;
+  audio.volume = v / 100;
+  volGate.value = v; volPlayer.value = v;
+  paintRange(volGate); paintRange(volPlayer);
+  $('#volNum').textContent = v;
+  $('#volMood').textContent = mood(v);
+  store.set('vol', v);
+}
+const savedVol = store.get('vol');
+setVol(savedVol !== null ? savedVol : 60);
+volGate.addEventListener('input', () => setVol(volGate.value));
+volPlayer.addEventListener('input', () => setVol(volPlayer.value));
+
+function playSong(){
+  audio.volume = volPlayer.value / 100;
+  const p = audio.play();
+  if (p && p.catch) p.catch(() => {
+    // si el navegador lo bloquea, reintenta cargando el archivo
+    try { audio.load(); } catch(e){}
+    audio.play().catch(() => player.classList.add('needtap'));
+  });
+  return p;
+}
+audio.addEventListener('error', () => player.classList.add('needtap'));
+
+let testing = false;
+$('#testBtn').addEventListener('click', () => {
+  if (!testing){
+    testing = true; $('#testBtn').textContent = '❚❚ Pausar'; $('#miniVinyl').classList.add('on');
+    const p = playSong();
+    if (p && p.catch) p.catch(() => { testing = false; $('#testBtn').textContent = '▶ Probar'; $('#miniVinyl').classList.remove('on'); });
+  } else {
+    audio.pause(); testing = false; $('#testBtn').textContent = '▶ Probar'; $('#miniVinyl').classList.remove('on');
+  }
+});
+
+$('#enterBtn').addEventListener('click', e => {
+  if (audio.paused) playSong();
+  burst(e.clientX, e.clientY, 26);
+  $('#gate').classList.add('out');
+  document.body.classList.remove('locked');
+  $('#main').removeAttribute('aria-hidden');
+  setTimeout(() => { $('#gate').style.display = 'none'; }, 950);
+  $('#player').classList.add('show');
+  startHero();
+});
+
+/* ---------- PLAYER ---------- */
+const player = $('#player');
+audio.addEventListener('playing', () => { player.classList.add('playing'); player.classList.remove('needtap'); });
+audio.addEventListener('pause', () => player.classList.remove('playing'));
+$('#disc').addEventListener('click', () => audio.paused ? playSong() : audio.pause());
+
+// fade helper (para el video)
+let fadeRaf;
+function fadeTo(target, ms, then){
+  cancelAnimationFrame(fadeRaf);
+  const from = audio.volume, t0 = performance.now();
+  (function step(t){
+    const k = Math.min(1, (t - t0) / ms);
+    audio.volume = from + (target - from) * k;
+    if (k < 1) fadeRaf = requestAnimationFrame(step); else then && then();
+  })(t0);
+}
+let musicWasOn = false;
+const vid = $('#vid');
+vid.addEventListener('play', () => { musicWasOn = !audio.paused; if (musicWasOn) fadeTo(0, 600, () => audio.pause()); });
+vid.addEventListener('pause', () => { if (musicWasOn){ audio.volume = 0; audio.play().catch(()=>{}); fadeTo(volPlayer.value/100, 900); } });
+
+/* ================= HERO ================= */
+function typeText(el, text, speed = 38){
+  if (reduce){ el.textContent = text; return; }
+  let i = 0; el.innerHTML = '<span></span><i class="caret"></i>';
+  const span = el.firstChild;
+  (function t(){
+    span.textContent = text.slice(0, ++i);
+    if (i < text.length) setTimeout(t, text[i-1] === ',' || text[i-1] === '.' ? speed * 7 : speed);
+  })();
+}
+function startHero(){
+  $$('#hero .rv').forEach(el => el.classList.add('in'));
+  $('#collage').classList.add('go');
+  setTimeout(() => typeText($('#typed'), `${NAME}, tú eres lo cotidiano y lo extraordinario. Esta página es mía para ti: explórala despacito, cada detalle lo pensé en ti.`), 700);
+}
+
+/* ================= REVEAL ON SCROLL ================= */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+}, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+$$('.rv').forEach(el => { if (!el.closest('#hero')) io.observe(el); });
+
+/* progress thread + timeline line */
+const thread = $('#thread'), tl = $('#timeline');
+function onScroll(){
+  const h = document.documentElement.scrollHeight - innerHeight;
+  thread.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+  const r = tl.getBoundingClientRect();
+  const k = Math.min(1, Math.max(0, (innerHeight * .6 - r.top) / r.height));
+  tl.style.setProperty('--tl', k);
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* ================= COUNTER ================= */
+const cells = {D:$('#cD'), H:$('#cH'), M:$('#cM'), S:$('#cS')};
+const prev = {};
+const fmt = n => n.toLocaleString('es-CO');
+function setCell(k, v){
+  if (prev[k] === v) return;
+  prev[k] = v;
+  const el = cells[k];
+  el.innerHTML = `<span>${k === 'D' ? fmt(v) : String(v).padStart(2,'0')}</span>`;
+  if (!reduce) el.firstChild.animate([{transform:'translateY(70%)', opacity:0},{transform:'none', opacity:1}], {duration:380, easing:EASE});
+}
+function tickCounter(){
+  let s = Math.max(0, Math.floor((Date.now() - FIRST_KISS) / 1000));
+  const total = s;
+  setCell('D', Math.floor(s / 86400)); s %= 86400;
+  setCell('H', Math.floor(s / 3600)); s %= 3600;
+  setCell('M', Math.floor(s / 60));
+  setCell('S', s % 60);
+  $('#beats').textContent = fmt(Math.floor(total * 80 / 60));
+}
+tickCounter(); setInterval(tickCounter, 1000);
+
+/* count-up stats */
+const cio = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  cio.unobserve(en.target);
+  const el = en.target, end = +el.dataset.count, t0 = performance.now(), dur = reduce ? 1 : 1800;
+  (function f(t){
+    const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 4);
+    el.textContent = fmt(Math.round(end * e));
+    if (k < 1) requestAnimationFrame(f);
+  })(t0);
+}), {threshold:.5});
+$$('[data-count]').forEach(el => cio.observe(el));
+
+/* ================= GALLERY ================= */
+const photos = [
+  ['01','Tú en mi espalda… o yo en la tuya. Igual nos sostenemos 😌'],
+  ['02','Serendipia: encontrar lo que no estabas buscando. Te encontré a ti.'],
+  ['03','Mi lugar favorito del mundo entero'],
+  ['04','Parar la moto, solo para besarte'],
+  ['05','En blanco y negro también eres mi color favorito'],
+  ['06','Tú, yo, la moto y el camino'],
+  ['07','“Que me cojas de la mano… todo, taaanto” 🫶'],
+  ['08','Frío afuera, calorcito aquí'],
+  ['09','Sentados en la montaña, soñando con nuestra casa'],
+  ['10','Te alzaría por encima de cualquier montaña'],
+  ['11','La ciudad brilla, pero tú brillas más'],
+  ['12','Y luego dices que no eres perfecta…'],
+  ['13','Nosotros, en modo selfie'],
+  ['14','Esos ojitos preciosos'],
+  ['15','Tus abrazos son refugio']
+];
+const board = $('#board');
+photos.forEach(([f, cap], i) => {
+  const b = document.createElement('button');
+  const r = ((i * 37) % 11) - 5;
+  b.className = 'pol rv';
+  b.style.setProperty('--r', r + 'deg');
+  b.style.setProperty('--i', i % 4);
+  b.innerHTML = `${i % 3 === 0 ? '<div class="tape"></div>' : ''}<img src="fotos/${f}.jpeg" alt="" loading="lazy"><figcaption>${['💗','✨','🫶','🌙','🏔️'][i%5]}</figcaption>`;
+  b.addEventListener('click', () => openLb(f, cap));
+  board.appendChild(b); io.observe(b);
+});
+const lb = $('#lb');
+function openLb(f, cap){
+  $('#lbImg').src = `fotos/${f}.jpeg`;
+  $('#lbCap').textContent = cap;
+  lb.classList.add('open');
+  $('#lbX').focus({preventScroll:true});
+}
+function closeLb(){ lb.classList.remove('open'); }
+$('#lbX').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+/* ================= QUIZ ================= */
+const Q = [
+  { q:'¿Quién ama más a quién?', trap:true, opts:[
+      ['Yo lo amo más a él', 'Respuesta incorrecta ❌ Sebastián te ama más. Fin del debate. (Pero me derrite que lo intentes)'],
+      ['Él me ama más a mí', '¡Exacto! Me alegra que lo tengas claro 😌💗'] ] },
+  { q:'¿Qué te preguntó Sebas justo antes del primer beso?', opts:[
+      ['Si tenía hambre', 'Jajaja no 😂 aunque es una pregunta muy mía.'],
+      ['Si podía besarte', '¡Sí! Y tú me diste las gracias por preguntar 🥹', true],
+      ['Qué hora era', 'Nop. Ese día el tiempo se congeló, no había hora 🫠'] ] },
+  { q:'Si Sebas te pide tu buzo favorito, ¿se lo cambias?', trap:true, opts:[
+      ['Jamás, es mío', 'No importa: “Ya perdiste de igual modo JAJAJAJA” 🧥'],
+      ['Bueno… sí', 'Sabía que eras débil ante mí 😏🧥'] ] },
+  { q:'¿Quién dijo “te amo” primero?', opts:[
+      ['Yo', 'Mmm… revisa el chat: 15 de septiembre, 10:41 p. m. 👀'],
+      ['Él', '¡Correcto! “Pero creo te amo Fer 🫠”. No era “creo”, era seguro.', true] ] },
+  { q:() => `¿A qué le tiene FOBIA ${NAME}?`, opts:[
+      ['A las arañas', 'Nop 🕷️ intenta de nuevo…'],
+      ['A los piojos', 'JAJAJA sí. FOBIA, en mayúsculas 😂', true],
+      ['A que Sebas no le escriba', 'También cuenta, no te voy a mentir 🥺💗', true] ] },
+  { type:'slider' },
+  { type:'final' }
+];
+let qi = 0;
+const qStage = $('#qStage'), qDots = $('#qDots');
+Q.forEach(() => qDots.appendChild(document.createElement('i')));
+function dots(){ [...qDots.children].forEach((d,i) => d.classList.toggle('on', i <= qi)); }
+
+function renderQ(){
+  dots();
+  const it = Q[qi];
+  const card = document.createElement('div');
+  card.className = 'qcard enter';
+  if (it.type === 'slider') return renderSlider(card);
+  if (it.type === 'final') return renderFinal(card);
+  const title = typeof it.q === 'function' ? it.q() : it.q;
+  card.innerHTML = `${it.trap ? '<span class="trap">pregunta trampa</span>' : ''}<h3>${title}</h3><div class="opts"></div><p class="reply"></p>`;
+  const opts = card.querySelector('.opts'), reply = card.querySelector('.reply');
+  let done = false;
+  it.opts.forEach(([t, r, ok], i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<b>${'abc'[i]}</b> ${t}`;
+    b.addEventListener('click', e => {
+      reply.textContent = r; reply.classList.remove('show'); void reply.offsetWidth; reply.classList.add('show');
+      const needsOk = it.opts.some(o => o[2]);
+      if (needsOk && !ok){ b.classList.remove('no'); void b.offsetWidth; b.classList.add('no'); return; }
+      $$('.qcard .opt').forEach(x => x.classList.remove('ok')); b.classList.add('ok');
+      burst(e.clientX, e.clientY, 10);
+      if (!done){ done = true; addNext(card); }
+    });
+    opts.appendChild(b);
+  });
+  swap(card);
+}
+function addNext(card){
+  const n = document.createElement('button');
+  n.className = 'btn'; n.textContent = 'Siguiente →'; n.style.alignSelf = 'flex-end';
+  n.addEventListener('click', () => { qi++; renderQ(); });
+  card.appendChild(n);
+}
+function swap(card){ qStage.innerHTML = ''; qStage.appendChild(card); }
+
+function renderSlider(card){
+  card.innerHTML = `<span class="trap">pregunta trampa</span><h3>Del 1 al 10, ¿qué tan guapo es Sebastián?</h3>
+    <div class="handsome"><div class="vol-num" id="hNum">5</div><input type="range" id="hR" min="1" max="10" value="5" aria-label="Puntaje"></div>
+    <p class="reply"></p>`;
+  swap(card);
+  const r = card.querySelector('#hR'), num = card.querySelector('#hNum'), reply = card.querySelector('.reply');
+  let done = false;
+  const lines = ['Ese número no existe en este sistema 😌','Error: valor no permitido 🙅‍♂️','Intenta otra vez, con cariño 🥺','El sistema solo acepta 10 💅'];
+  let n = 0;
+  paintRange(r);
+  r.addEventListener('input', () => { num.textContent = r.value; paintRange(r); });
+  r.addEventListener('change', () => {
+    if (+r.value < 10){
+      reply.textContent = lines[n++ % lines.length];
+      reply.classList.remove('show'); void reply.offsetWidth; reply.classList.add('show');
+      setTimeout(() => {
+        r.value = 10; num.textContent = '10'; paintRange(r);
+        if (!reduce) num.animate([{transform:'scale(1.4)'},{transform:'none'}], {duration:400, easing:EASE});
+        if (!done){ done = true; addNext(card); }
+      }, 500);
+    } else {
+      reply.textContent = '10/10. Tienes excelente gusto, ¿sabías? 😏';
+      reply.classList.remove('show'); void reply.offsetWidth; reply.classList.add('show');
+      if (!done){ done = true; addNext(card); }
+    }
+  });
+}
+
+function renderFinal(card){
+  card.innerHTML = `<span class="trap">la última (y la más importante)</span>
+    <h3>${NAME}, ¿te quedas conmigo para siempre?</h3>
+    <div class="final-zone" id="fz"><button class="btn" id="yesBtn">Sí, para siempre 💗</button><button class="btn ghost" id="noBtn">No</button></div>
+    <p class="reply"></p>`;
+  swap(card);
+  const yes = card.querySelector('#yesBtn'), no = card.querySelector('#noBtn'), zone = card.querySelector('#fz'), reply = card.querySelector('.reply');
+  const noTexts = ['No','¿Segura?','Piénsalo bien','Ni lo intentes','Error 404','No se puede 😌','🥺'];
+  let tries = 0;
+  function flee(e){
+    if (e) e.preventDefault();
+    tries++;
+    no.textContent = noTexts[Math.min(tries, noTexts.length - 1)];
+    const zr = zone.getBoundingClientRect(), br = no.getBoundingClientRect();
+    const maxX = zr.width / 2 - br.width / 2 - 6, maxY = zr.height / 2 - br.height / 2 - 6;
+    const x = (Math.random() * 2 - 1) * maxX, y = (Math.random() * 2 - 1) * maxY;
+    no.style.transform = `translate(${x}px, ${y}px)`;
+    yes.style.transform = `scale(${Math.min(1 + tries * .12, 1.7)})`;
+  }
+  if (fine) no.addEventListener('pointerenter', flee);
+  no.addEventListener('pointerdown', flee);
+  no.addEventListener('click', flee);
+  yes.addEventListener('click', e => {
+    const r = yes.getBoundingClientRect();
+    for (let i = 0; i < 4; i++) setTimeout(() => burst(r.left + r.width/2 + (Math.random()-.5)*200, r.top + (Math.random()-.5)*120, 22), i * 180);
+    zone.innerHTML = '<div style="font-family:var(--script);font-size:64px;color:var(--velvet);line-height:1">Para siempre</div>';
+    reply.textContent = `Puntaje final: 100% enamorada. Todas las preguntas tenían trampa, ${NAME}: si me amas, todas tus respuestas eran correctas 💗`;
+    reply.classList.add('show');
+    qi = Q.length - 1; dots(); [...qDots.children].forEach(d => d.classList.add('on'));
+  });
+}
+renderQ();
+
+/* ================= REASONS ================= */
+const reasons = [
+  'Tu sonrisa de oreja a oreja, la más hermosa que he visto',
+  'Tu mirada cristalina (y tus aretes, sí, también tus aretes)',
+  'Tu niña interior: caprichosa, risueña, viva',
+  'Que seas tan cercana a Dios',
+  'Tus pucheros y tus gestos',
+  'Que todavía me haces trabar al hablar',
+  'Tus abrazos: refugio y hogar',
+  '“Sebas, tú no tomes más, tú debes manejar” — cómo me cuidas',
+  'Que crees que si lo dices en voz alta, se cumple',
+  'Que hacemos promesas para cumplirlas',
+  'Que contigo mis días suenan alegres y llenos de colores',
+  'Que eres lo extraordinario. Todo, todo de ti'
+];
+const rg = $('#reasons');
+reasons.forEach((t, i) => {
+  const b = document.createElement('button');
+  b.className = 'flip rv'; b.style.setProperty('--i', i % 4);
+  b.setAttribute('aria-label', 'Abrir razón ' + (i + 1));
+  b.innerHTML = `<div class="in"><div class="f"><span class="s">♥</span><small>razón nº ${i+1}</small></div><div class="b">${t}</div></div>`;
+  b.addEventListener('click', e => {
+    if (b.classList.contains('open')) return;
+    b.classList.add('open'); burst(e.clientX, e.clientY, 8);
+  });
+  rg.appendChild(b); io.observe(b);
+});
+
+/* ================= LETTER ================= */
+const letterText = [
+  'Recuerdo que desde pequeño siempre creí en el amor verdadero, era fiel creyente de encontrar un amor que me durara mínimo toda la vida. Siempre anhelé compartir mi vida con alguien con quien sintiera que el tiempo se congela con una sonrisa, donde las miradas por microsegundos se vuelven décadas, donde un abrazo venga cargado de calor y amor; esos abrazos con los que sientes que algo dentro de ti despierta. Algo que siempre estuvo dormido, pero alguien con un simple gesto pero valioso, logró encender. ¡Son cosquillitas en el corazón!',
+  'Deseaba alguien con quien recorrer el camino tomados de la mano y que si alguno de los dos tropieza, el otro lo sostenga. Es la vida.',
+  'Afortunadamente, me equivoqué de amores en dos ocasiones, en toda mi vida. Por ahí dicen que la tercera es la vencida, y sé que tu compañía y tu amor serán el último.',
+  'No entiendo por qué no te conocí antes, ¿cómo es posible que haya pasado toda una vida sin saber qué es el amor verdadero?',
+  'Me arrepiento de haber fallado, de entregarle mi amor a personas que no lo merecían y que me terminaron haciendo daño. A consecuencia de todo esto, estuve mucho tiempo solo, ansioso por conocer la persona correcta, pero sin el afán de encontrar una pronto. Sé que es difícil coincidir con la persona adecuada, por eso nunca me apresuré por conseguirla. La espera siempre vale la pena. Las cosas buenas siempre tardan en llegar.',
+  'A pesar de que hubiese querido que llegaras a mi vida antes, llegaste en el momento oportuno. En el momento exacto, en el momento que era.',
+  'Llegaste en el momento en que jamás creí conocer al amor, que estoy seguro, será mi amor eterno. Y eso me tomó por sorpresa.',
+  'Aquella tarde no estaba dentro de mis planes enamorarme, ni sentir atracción por una mirada cristalina ni una sonrisa de oreja a oreja, la sonrisa más hermosa que he podido contemplar. Desde el día 1 empezaste a sorprenderme.',
+  'Ni mi mente ni mi corazón estaban preparados para sufrir un cambio tan extremo: años de soledad, donde mis ojos no veían por nadie, donde no sentía corazonadas, no me daban pena las mujeres, y llegas tú: me haces trabar al hablar, mis ojos se iluminan al ver tu sonrisa, mi cuerpo entero se descompensó tan solo de ver tu mirada penetrante y tus aretes.',
+  'Quizá por eso mi reacción el primer día: hubo química, y mi ser, para nada estaba preparado.',
+  'Desde que te conocí, todo dentro de mí cambió, mi rutina se vio alterada por ti, más aplicado y más juicioso. La manera en que empecé a ver el mundo fue más feliz, mis días empezaron a sonar alegres y a verse llenos de colores. Empecé a percibir la vida distinta, empecé a percibir la vida con amor.',
+  'El mismo amor que despertaste en mí era tan fuerte pero tan invisible a la vez, que desde lejos sentía tu presencia y notaba tu ausencia. Los días que faltabas al trabajo no tenían sentido, a pesar de que a duras penas nos dirigíamos la palabra.',
+  'Tuvimos la suerte de coincidir y la magia de conectar, ¡sí!',
+  'Llegaste de repente a mostrarme que fuiste lo que desde pequeño deseaba: ¡un amor verdadero! Llegaste para que mi ser te pudiera entregar todo de mí, llegaste para enseñarme que lo que siempre quise era posible, que existía en un mundo tangible, y no se esfumaba en lo intangible de mi memoria y de mi fantasía.',
+  'Todo de ti me atrapó, me aferro a ti segundo a segundo con más fuerza, porque segundo a segundo el universo nos está mostrando que somos uno para el otro. Y este privilegio, si me lo permites, lo tendré a mi lado por la eternidad.',
+  'Ni con 1.000 diccionarios alcanzaría a expresarte todo lo que significas para mí:',
+  'Significas lo cotidiano y lo extraordinario, significas la calma que me da saber que estás, y la certeza de que estarás, la felicidad de tu presencia y la tristeza de tu ausencia, significas refugio con tus abrazos, complicidad con tus besos, significas el hogar al que siempre quiero volver. Significas mi mundo, porque desde que estás, empecé a vivir en otro cuerpo y en otra dimensión. Eres todo lo extraordinario.',
+  'Contigo no pido ser solo una etapa, no quiero hacer parte de una fracción de tu vida, ni tampoco quiero que se me acaben tus besos.',
+  'Contigo quiero que hagamos el resultado de nuestro amor, los bautizaremos con nuestros apellidos. Quiero que construyamos con la fuerza de nuestro amor, ¿será campestre o citadina? Quiero que Dios nos tome con sus manos y haga valiente nuestro amor, ¿dónde será la luna de miel? Quiero que el producto de todo lo que somos se nos manifieste en éxito, abundancia, felicidad, unión, resiliencia, valentía, salud y plenitud.',
+  'En mi mente todos los días visualizo nuestro hogar en unos años, sé que seremos envidiables, y sé que somos las personas idóneas para lograrlo.',
+  'Recuerda que…'
+];
+const letter = $('#letter');
+letter.innerHTML =
+  `<p class="dear"><span data-name>${NAME}</span>:</p>` +
+  letterText.map(t => `<p class="lp">${t}</p>`).join('') +
+  `<p class="lp verse">« Ponme como un sello sobre tu corazón, como un sello sobre tu brazo; porque fuerte es como la muerte el amor; las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos. »<br><small>Cantares 8:6-7</small></p>` +
+  `<p class="lp sign">Más que te amo 💗</p>`;
+const lio = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); lio.unobserve(en.target); } }), {threshold:.2});
+$('#env').addEventListener('click', e => {
+  const env = $('#env');
+  if (env.classList.contains('open')) return;
+  env.classList.add('open');
+  $$('#letter [data-name]').forEach(el => el.textContent = NAME);
+  burst(e.clientX, e.clientY, 16);
+  $('#envHint').textContent = 'ahora léela despacito, con la canción de fondo…';
+  setTimeout(() => {
+    letter.classList.add('show');
+    $$('#letter .lp').forEach(p => lio.observe(p));
+    letter.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  }, reduce ? 50 : 1200);
+});
+
+/* ================= FUTURE ================= */
+$$('.fq').forEach(box => {
+  const key = 'fut-' + box.dataset.key, reply = box.querySelector('.reply');
+  const chips = [...box.querySelectorAll('.chip')];
+  function pick(i, animate, e){
+    chips.forEach((c, j) => c.classList.toggle('sel', i === j));
+    reply.textContent = chips[i].dataset.r;
+    reply.classList.remove('show'); void reply.offsetWidth; reply.classList.add('show');
+    if (animate && e) burst(e.clientX, e.clientY, 10);
+    store.set(key, i);
+  }
+  chips.forEach((c, i) => c.addEventListener('click', e => pick(i, true, e)));
+  const saved = store.get(key);
+  if (saved !== null && chips[+saved]) pick(+saved, false);
+});
+
+/* ================= FINAL ================= */
+$('#bigHeart').addEventListener('click', e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2, 34);
+});
+$('#final').addEventListener('click', e => {
+  if (e.target.closest('#bigHeart')) return;
+  burst(e.clientX, e.clientY, 12);
+});
+})();
+</script>
+</body>
+</html>
